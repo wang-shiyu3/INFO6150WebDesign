@@ -1,0 +1,68 @@
+body {
+    font-family: Verdana, Arial, sans-serif;
+    background-color: #e7d677;
+    background-image: url(javabackground.gif);
+}
+main {
+    padding: 20px;
+    display: block;
+}
+nav {
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+    background-color: #E6D6A9;
+    padding: 10px;
+}
+nav a {
+    text-decoration: none;
+}
+dt {
+    font-weight: bold;
+}
+ul {
+    list-style-image: url(maker.gif);
+}
+footer {
+    text-align: center;
+    font-style: italic;
+    font-size: .60em;
+    padding: 10px;
+    background-color: #ccaa66;
+}
+header {
+    background-color: #ccaa66;
+    background-position: right;
+    background-repeat: no-repeat;
+    color: #ffff99;
+    line-height: 400%;
+    text-indent: 1em;
+}
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; }
+h1{
+    background-image: url(javalogo.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100px;
+    margin: 0px;
+    text-indent: -9999px;
+}
+#wrapper { 
+    background-color: #F5F5DC; 
+    box-shadow: 3px 3px 3px #2E0000;
+    width: 80%;
+    margin: auto;
+    min-width: 960px;
+    max-width: 2048px;
+} 
+#hero {
+    height: 300px;
+    color: #f5f5dc;
+    background-image: url(windingroad.jpg);
+    background-size:100% 100%;
+    background-repeat: no-repeat;
+}
+.news{
+    margin-left: 20%;
+    margin-right: 20%;
+}
