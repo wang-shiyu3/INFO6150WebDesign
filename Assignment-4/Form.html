@@ -13,17 +13,52 @@
       main{
           padding: 50px;
       }
+	  #emailError {
+		  display: none;
+		  color: red;
+	  }
+	  #phoneError {
+		  display: none;
+		  color: red;
+	  }
+	  #zipcodeError {
+		  display: none;
+		  color: red;
+	  }
+	  #textboxError {
+		display: none;
+		  color: red;
+	  }
+	  .contain {
+		border-top: 0.5px solid black;
+		float: top;
+		padding-top: 0px;
+	  }
+	  #pro1 {
+		  display: none;
+	  }
+	  #pro2 {
+		  display: none;
+	  }
+	  #pro3 {
+		  display: none;
+	  }
+	  #pro4 {
+		  display: none;
+	  }
+	  #pro5 {
+		  display: none;
+	  }
   </style>
  </head>
  <body>
  <div id="container">
-	 
 	 <main>
 	 <h2>Feeback</h2>
 	 <h3>Love something? Hate something? Let us know!</h3>
 		 Note : Fields marked with an asterisk(*) are mandatory
 		 <br><br>
-		 <form method="post" novalidate>
+		 <form  id="form" action="display.html" method="GET">
 			<label>Title*:</label>
 			<input type="radio" name="title" id="miss" value="miss" required="required"/>Miss
 			<input type="radio" name="title" id="mr" value="mr" required="required"/>Mr.
@@ -41,15 +76,18 @@
 
 			<label for="emailId">Email Id*:</label>
 			<input type="text" name="emailId" id="emailId" placeholder="yourname@domain.com" />
+			<div id="emailError">please enter a valid email address.</div>
 			<br><br>
 			
 
 			<label for="phoneNumber">Phone Number*:</label>
 			<input type="text" name="phoneNumber" id="phoneNumber" placeholder="xxx-xxx-xxxx" />
+			<div id="phoneError">please enter a valid phone number.</div>
 			<br><br>
 			
             <label for="zipcode">ZipCode*:</label>
 			<input type="text" name="zipcode" id="zipcode" placeholder="xxxxxx" />
+			<div id="zipcodeError">please enter a valid zip code.</div>
 			<br><br>
              
             <label for="zipcode">How did you hear*:</label>
@@ -61,7 +99,44 @@
 			<label for="comments">Comments*:</label>
 			<textarea name="text" id="comments" placeholder="Your comments" rows="5" cols="25"></textarea>
 			<br><br>
-			<input type="Submit">
+
+			<label for="product">Product*:</label>
+			<select name="select" id="select" onchange="display()">
+				<option disabled selected value> -- select a product --</option>
+				<option value="Product1">Product1</option>
+				<option value="Product2">Product2</option>
+				<option value="Product3">Product3</option>
+				<option value="Product4">Product4</option>
+				<option value="Product5">Product5</option>
+			</select>
+			<div id="textboxError">please choose a product type</div>
+			<br>
+			<br>
+			<div class="contain">
+				<div id="pro1">
+					<label><input type="checkbox" name="t1" value="type1" onclick="hideOthers('pro1')">type1</label><br>
+					<label><input type="checkbox" name="t2" value="type2" onclick="hideOthers('pro1')">type2</lable><br>
+				</div>
+				<div id="pro2">
+					<label><input type="checkbox" name="t3" value="type3" onclick="hideOthers('pro2')">type3</lable><br>
+					<label><input type="checkbox" name="t4" value="type4" onclick="hideOthers('pro2')">type4</lable><br>
+				</div>
+				<div id="pro3">
+					<label><input type="checkbox" name="t5" value="type5" onclick="hideOthers('pro3')">type5</lable><br>
+					<label><input type="checkbox" name="t6" value="type6" onclick="hideOthers('pro3')">type6</lable><br>
+				</div>
+				<div id="pro4">
+					<label><input type="checkbox" name="t7" value="type7" onclick="hideOthers('pro4')">type7</lable><br>
+					<label><input type="checkbox" name="t8" value="type8" onclick="hideOthers('pro4')">type8</lable><br>
+				</div>
+				<div id="pro5">
+					<label><input type="checkbox" name="t9" value="type9" onclick="hideOthers('pro5')">type9</lable><br>
+					<label><input type="checkbox" name="t10" value="type10" onclick="hideOthers('pro5')">type10</lable><br>
+				</div>
+			</div>
+			<br>
+			<br>
+			<input type="Submit" onclick="validate()">
 			<input type="Reset">
 			<br><br>
 		 </form>
@@ -69,8 +144,105 @@
  </div>
 
  <script>
- 
- </script>
+	
+
+	function display(){
+		var productName = document.getElementById("select").value;
+		var index = productName[productName.length-1];
+		document.getElementById("pro"+index).style.display = "inline";
+		for(var i=1;i<5;i++){
+			if(i!=index){
+				document.getElementById("pro"+i).style.display = "none";
+			}
+		}
+	}
+
+	function validate(){
+		var emailId = document.getElementById('emailId').value;
+		var phoneNumber = document.getElementById('phoneNumber').value;
+		var postalCode = document.getElementById('zipcode').value;
+		var phoneRGEX = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
+		var postalRGEX = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+		var emailRGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+		var emailResult = emailRGEX.test(emailId);
+		var phoneResult = phoneRGEX.test(phoneNumber);
+		var postalResult = postalRGEX.test(postalCode);
+
+		if(emailId== "" || emailResult == false){
+			document.getElementById('emailError').style.display = 'inline-block';
+		}
+		if(phoneNumber== "" || phoneResult == false){
+			document.getElementById('phoneError').style.display = 'inline-block';
+		}
+		if(postalCode== "" || postalResult == false){
+			document.getElementById('zipcodeError').style.display = 'inline-block';
+		}
+		if(emailResult==true){
+			document.getElementById('emailError').style.display = 'none';
+		}
+		if(phoneResult == true){
+			document.getElementById('phoneError').style.display = 'none';
+		}
+		if(postalResult == true){
+			document.getElementById('zipcodeError').style.display = 'none';
+		}
+
+		var productName = document.getElementById("select").value;
+		var index = productName[productName.length-1];
+		var divName = document.getElementById('pro'+index);
+		var inputs = divName.getElementsByTagName('input');
+		var res = false;
+		for(var i=0;i<inputs.length;i++){
+			if(inputs[i].checked==true){
+				res = true;
+			}
+		}
+		if(res==false){
+			document.getElementById('textboxError').style.display = 'inline-block';
+		}
+
+
+		var title = document.getElementById("title").value;
+		var firstName = document.getElementById("firstName").value;
+		var lastName = document.getElementById("lastName").value;
+		var emailId = document.getElementById("emailId").value;
+		var phoneNumber = document.getElementById("phoneNumber").value;
+		var zipcode = document.getElementById("zipcode").value;
+		var source = document.getElementById("source").value;
+		var text = document.getElementById("text").value;
+		var select = document.getElementById("select").value;
+		var checkboxval = document.getElementById("contain").getElementsByTagName('input')[0].value;
+		
+		var queryString = "?para1=" + title + "&para2=" + firstName + "&para3=" + lastName + "&para4=" + emailId + "&para5=" + phoneNumber
+		 + "&para6=" + zipcode + "&para7=" + source + "&para8=" + text + "&para9=" + select + "&para10=" + checkboxval;
+		window.location.href = "display.html" + queryString;
+	}
+	function hideOthers(productId){
+		var inputs = document.getElementById(productId).getElementsByTagName('input');
+		var flag = false;
+		for(var i=0;i<inputs.length;i++){
+			if(inputs[i].checked==true){
+				flag=true;
+			}
+		}
+		if(flag==false){
+			for(var i=0;i<inputs.length;i++){
+				inputs[i].parentNode.style.display='inline-block';
+			}
+		}
+		else{
+			for(var i=0;i<inputs.length;i++){
+				if(inputs[i].checked==false){
+					inputs[i].parentNode.style.display='none';
+					inputs[i].parentNode.style.float='top';
+				}
+				else{
+					inputs[i].parentNode.style.display='inline-block';
+				}
+			}
+		}	
+	}
+</script>
 
  </body>
 </html>
